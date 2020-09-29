@@ -2,7 +2,9 @@
 title: "Project regression models"
 author: "Nb"
 date: "29 September 2020"
-output: html_document
+output:
+  html_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -91,7 +93,7 @@ for (i in value) {
 
 # this is the minimum p-value for mpg with wich variable
 min(p)
-
+cbind(Rank=order(p), p)
 ```
 
 Now we will search the variable wich is more correlated to the <span style="color: red;">mpg</span>	*Miles/(US) gallon*
@@ -103,4 +105,23 @@ summary(lm(mpg~wt, mtcars))$coef
 
 We conclude that there is relationsheep between **weigth** and mpg 
 with slope equal to ** *-5.344* **
+
+### anova
+```{r}
+anova(lm(mpg ~ am, mtcars), #1
+      lm(mpg ~ am + wt, mtcars), #2
+      lm(mpg ~ am + wt + drat, mtcars), #3
+      lm(mpg ~ am + wt + drat + qsec, mtcars), #4
+      lm(mpg ~ am + wt + drat + qsec + gear, mtcars), #5
+      lm(mpg ~ wt, mtcars), #6
+      lm(mpg ~ wt + drat, mtcars), #7
+      lm(mpg ~ wt + drat + qsec, mtcars), #8
+      lm(mpg ~ wt + drat + qsec + gear, mtcars), #9
+      lm(mpg ~ cyl, mtcars)) #10
+
+```
+
+```{r}
+par(mfrow = c(2,2)); plot(lm(mpg ~ cyl, mtcars))
+```
 

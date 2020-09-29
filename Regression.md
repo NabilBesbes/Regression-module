@@ -2,7 +2,10 @@
 title: "Project regression models"
 author: "Nb"
 date: "29 September 2020"
-output: html_document
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
